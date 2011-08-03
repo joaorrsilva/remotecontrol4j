@@ -14,7 +14,17 @@ public class Host
   private String ip;
   /** 端口号 **/
   private int port;
+  
+  public Host(){
+  	
+  }
 
+  public Host(String mac,String ip,int port){
+  	this.mac = mac;
+  	this.ip = ip;
+  	this.port = port;
+  }
+  
   public String getMac()
   {
     return mac;
