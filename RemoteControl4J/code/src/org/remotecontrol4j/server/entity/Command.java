@@ -1,6 +1,6 @@
 package org.remotecontrol4j.server.entity;
 
-import java.util.List;
+import org.remotecontrol4j.server.runtime.Executor;
 
 /**
  * 命令实体类
@@ -10,30 +10,15 @@ import java.util.List;
  */
 public class Command
 {
-	/** 命令名称  **/
-	private String name;
-	
-	/** 命令参数列表 **/
-	private List<String> params;
+	/** 可执行的命令  **/
+	protected Executor executor;
 	
 	/** 是否为多线程执行 **/
-	private boolean isMultiThread = false;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public List<String> getParams() {
-		return params;
-	}
-
-	public void setParams(List<String> params) {
-		this.params = params;
-	}
+	protected boolean isMultiThread = false;
+	
+	/** 线程,默认个数为10 **/
+	protected int threadCount = 10;
+	
 
 	public boolean isMultiThread() {
 		return isMultiThread;
@@ -42,5 +27,21 @@ public class Command
 	public void setMultiThread(boolean isMultiThread) {
 		this.isMultiThread = isMultiThread;
 	}
-	
+
+	public int getThreadCount() {
+		return threadCount;
+	}
+
+	public void setThreadCount(int threadCount) {
+		this.threadCount = threadCount;
+	}
+
+	public Executor getExecutor() {
+		return executor;
+	}
+
+	public void setExecutor(Executor executor) {
+		this.executor = executor;
+	}
+
 }

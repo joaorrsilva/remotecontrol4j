@@ -71,8 +71,7 @@ public class Host
         for (int i = 0; i < 6; i++) {
             bytes[i] = (byte) Integer.parseInt(hex[i], 16);
         }
-    }
-    catch (NumberFormatException e) {
+    }catch (NumberFormatException e) {
         throw new IllegalArgumentException("Invalid hex digit in MAC address.");
     }
     return bytes;

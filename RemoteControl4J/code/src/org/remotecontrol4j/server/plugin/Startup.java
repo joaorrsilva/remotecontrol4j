@@ -22,7 +22,7 @@ import org.remotecontrol4j.server.util.StringUtil;
  * 2.目标服务器的网卡只要接收到这些数据包,便将其唤醒 <br> 
  * 
  */
-public class Startup
+public class StartUp
 {
 
   /**默认远程唤醒的广播地址**/
