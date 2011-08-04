@@ -21,14 +21,14 @@ public class Process {
 	 * 启动本程式时自动加载初始化操作<br>
 	 */
 	static{
-		initOrder();
+		init();
 	}
 	
 	/**
 	 * 进程初始化操作  <br>
 	 * 将本类型OS的命令全部加载到内存中 <br>
 	 */
-	private static void initOrder(){		
+	private static void init(){		
 		CMD_MAP.put(Executor.shutdown_key, new ShutDown().load());
 		CMD_MAP.put(Executor.restart_key, new Restart().load());
 		CMD_MAP.put(Executor.arp_key, new Arp().load());
