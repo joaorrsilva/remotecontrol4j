@@ -8,7 +8,7 @@ public class TestStartup
 	public static void main(String[] args){
 		String mac = "" ;
 		Host host = new Host(mac,"",9);
-		Startup startup = new Startup();
+		StartUp startup = new StartUp();
 		startup.sendMessage(host);
 	}
 }
