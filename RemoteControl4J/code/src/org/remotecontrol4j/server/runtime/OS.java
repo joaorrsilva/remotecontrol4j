@@ -9,5 +9,19 @@ package org.remotecontrol4j.server.runtime;
 public enum OS
 {
 	WINDOWS,
-	UNIX
+	UNIX;
+	
+	/** 默认为Windows **/
+	public static OS type = WINDOWS;
+	
+	/**
+	 * 判断当前系统类型
+	 * @return
+	 */
+	public static void initCurrentOS(){
+		if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") != -1) {
+			type = OS.WINDOWS;
+		}
+		type = OS.UNIX;
+	}
 }

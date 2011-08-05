@@ -1,9 +1,9 @@
 package org.remotecontrol4j.server.plugin;
 
-import org.remotecontrol4j.server.entity.Command;
+import org.remotecontrol4j.server.meta.Command;
 import org.remotecontrol4j.server.runtime.Container;
 import org.remotecontrol4j.server.runtime.Executor;
-import org.remotecontrol4j.server.runtime.Selector;
+import org.remotecontrol4j.server.runtime.OS;
 
 /**
  * 远程关机 <br>
@@ -20,7 +20,7 @@ public class ShutDown implements Container
 		Command cmd = new Command();
 		cmd.setMultiThread(true);
 		cmd.setThreadCount(10);
-		switch(Selector.SYSTEM){
+		switch(OS.type){
 		case WINDOWS:
 			cmd.setExecutor(Executor.win_shutdown);
 			break;

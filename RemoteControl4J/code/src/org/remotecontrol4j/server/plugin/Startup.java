@@ -5,7 +5,8 @@ import java.net.DatagramSocket;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import org.remotecontrol4j.server.entity.Host;
+import org.remotecontrol4j.server.meta.Host;
+import org.remotecontrol4j.server.runtime.Launcher;
 import org.remotecontrol4j.server.util.StringUtil;
 
 
@@ -22,7 +23,7 @@ import org.remotecontrol4j.server.util.StringUtil;
  * 2.目标服务器的网卡只要接收到这些数据包,便将其唤醒 <br> 
  * 
  */
-public class StartUp
+public class StartUp implements Launcher
 {
 
   /**默认远程唤醒的广播地址**/
@@ -59,7 +60,7 @@ public class StartUp
   /**
    * 向目标服务器发送唤醒数据包
    */
-  public boolean sendMessage(Host host)
+  public boolean send(Host host)
   {
     DatagramSocket ds = null;
     try {

@@ -1,6 +1,6 @@
 package org.remotecontrol4j.server.plugin;
 
-import org.remotecontrol4j.server.entity.Command;
+import org.remotecontrol4j.server.meta.Command;
 import org.remotecontrol4j.server.runtime.Container;
 
 /**

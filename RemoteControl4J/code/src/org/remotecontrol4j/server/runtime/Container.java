@@ -1,9 +1,9 @@
 package org.remotecontrol4j.server.runtime;
 
-import org.remotecontrol4j.server.entity.Command;
+import org.remotecontrol4j.server.meta.Command;
 
 /**
- * Windows、Unix系统命令装载器
+ * 操作系统命令装载器
  * 
  * @author and4walker
  *

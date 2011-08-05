@@ -14,7 +14,7 @@ public enum Executor
 	
 	win_shutdown("shutdown "),
 	win_restart("shutdown "),
-	win_arp("arp"),
+	win_arp("arp -a"),
 	
 	unix_shutdown("shutdown"),
 	unix_restart("shutdown"),
