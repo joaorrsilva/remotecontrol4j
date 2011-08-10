@@ -24,6 +24,16 @@ public class TaskRouter
 	
 	private static final int THREAD_POOL = 10;
 	
+	/**
+	 * 执行任务入口点
+	 * 
+	 * @param clazz
+	 * @param taskCount
+	 * @param threadCount
+	 * @param params
+	 * @return
+	 * @throws Exception
+	 */
 	public static <P extends Object> Result run(Class<? extends Task> clazz,int taskCount,int threadCount,P... params) throws Exception{
 		if(1 < threadCount){
 			return runMulti(clazz,taskCount,threadCount,params);
