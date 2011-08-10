@@ -5,8 +5,6 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 import org.remotecontrol4j.server.meta.Host;
-import org.remotecontrol4j.server.runtime.Launcher;
-
 
 /**
  * 利用InetAddress的isReachable方法实现 <br>
@@ -15,7 +13,7 @@ import org.remotecontrol4j.server.runtime.Launcher;
  * @author and4walker
  *
  */
-public class Ping implements Launcher{
+public class Ping{
 
 	private static final char TIME_OUT = 3000;
 	

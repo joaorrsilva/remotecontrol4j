@@ -1,6 +1,5 @@
 package org.remotecontrol4j.server.plugin;
 
-import org.remotecontrol4j.server.meta.Command;
 import org.remotecontrol4j.server.runtime.Container;
 import org.remotecontrol4j.server.runtime.Executor;
 import org.remotecontrol4j.server.runtime.OS;
@@ -14,16 +13,14 @@ import org.remotecontrol4j.server.runtime.OS;
 public class Arp implements Container
 {
 
-	public Command load() {
-		Command cmd = new Command();
-		cmd.setMultiThread(true);
-		cmd.setThreadCount(10);
+	public String load() {
+		String cmd = null;
 		switch(OS.type){
 		case WINDOWS:
-			cmd.setExecutor(Executor.win_arp);
+			cmd = Executor.win_arp.getPrototype();
 			break;
 		case UNIX:
-			cmd.setExecutor(Executor.unix_arp);
+			cmd = Executor.unix_arp.getPrototype();
 			break;
 		}
 		return cmd;
