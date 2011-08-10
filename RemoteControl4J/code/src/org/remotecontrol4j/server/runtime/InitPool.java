@@ -5,7 +5,7 @@ import java.util.EnumMap;
 import org.remotecontrol4j.server.plugin.Arp;
 import org.remotecontrol4j.server.plugin.Nbtstat;
 import org.remotecontrol4j.server.plugin.Restart;
-import org.remotecontrol4j.server.plugin.ShutDown;
+import org.remotecontrol4j.server.plugin.Shutdown;
 
 /**
  * 初始化常量池<br>
@@ -30,7 +30,7 @@ public class InitPool {
 	 * 将本类型OS的命令全部加载到内存中 <br>
 	 */
 	private static void cache(){		
-		CMD_MAP.put(Executor.shutdown_key, new ShutDown().load());
+		CMD_MAP.put(Executor.shutdown_key, new Shutdown().load());
 		CMD_MAP.put(Executor.restart_key, new Restart().load());
 		CMD_MAP.put(Executor.nbtstat_key, new Nbtstat().load());
 		CMD_MAP.put(Executor.arp_key, new Arp().load());
