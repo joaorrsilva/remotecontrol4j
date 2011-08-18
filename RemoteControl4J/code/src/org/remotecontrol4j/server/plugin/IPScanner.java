@@ -30,12 +30,17 @@ public class IPScanner<P> extends Task<P>
 		String ip = (String)this.params[0]+(this.taskId+1);
 		boolean flag = Ping.send(ip);
 		if(flag){
+			//根据arp 获取 mac地址
 			Launcher.run(InitPool.CMD_MAP.get(Executor.ping_key)+StringUtil.BLANK+ip);
-			String msg = Launcher.run(InitPool.CMD_MAP.get(Executor.arp_key)+StringUtil.BLANK+ip);
-			System.out.println(msg);
+			String msg = Launcher.run(InitPool.CMD_MAP.get(Executor.arp_key)+StringUtil.BLANK+ip);			
 			Result result = new Result();
-			result.setValue(OS.TYPE==OS.WINDOWS?msg.split(" ")[32]:msg.split(" ")[32]);//mac address
+			if(Arp.isNotNull(msg)){//arp cache不为空.mac地址就不为空
+				result.setValue(OS.TYPE==OS.WINDOWS?msg.split(" ")[32]:msg.split(" ")[32]);//mac address
+			}
 			return result;
+			
+			//如果是windows系统可以根据nbtstat获取计算机名
+			
 		}
 		return new Result();
 	}

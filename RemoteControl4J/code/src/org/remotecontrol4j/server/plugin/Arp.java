@@ -25,5 +25,18 @@ public class Arp implements Container
 		}
 		return cmd;
 	}
+	
+	/**
+	 * ARP Cache中是否为空
+	 * @param msg
+	 * @return
+	 */
+	public static boolean isNotNull(String msg){
+		String info = msg.split(" ")[0];
+		if("No".equals(info)){
+			return false;
+		}
+		return true;
+	}
 
 }
