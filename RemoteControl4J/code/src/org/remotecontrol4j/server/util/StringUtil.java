@@ -13,6 +13,9 @@ import java.util.regex.Pattern;
  */
 public class StringUtil
 {
+	/** 空格 **/
+	public static final String BLANK = " ";
+	
 	/**
 	 * 判断是否为空或空格
 	 * 
