@@ -20,7 +20,7 @@ public class Launcher
 	 * @throws Exception
 	 */
 	public static String  run(final String cmd) throws Exception{
-		String msg = null;
+		StringBuilder msgBuilder = new StringBuilder();
 		Process process = null;
 		InputStream inputStream = null;
 		InputStreamReader inputStreamReader = null;
@@ -30,8 +30,9 @@ public class Launcher
 		  inputStream = process.getInputStream();
 		  inputStreamReader = new InputStreamReader(inputStream);
 		  bufferReader = new BufferedReader(inputStreamReader);
+		  String msg = null;
       while ((msg=bufferReader.readLine()) != null) {
-      	msg += msg;
+      	msgBuilder.append(msg);
       }
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -53,7 +54,7 @@ public class Launcher
 				process.destroy();
 			}
 		}
-		return msg;
+		return msgBuilder.toString();
 	}
 	
 }
