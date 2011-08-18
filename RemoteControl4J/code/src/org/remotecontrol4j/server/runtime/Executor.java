@@ -12,6 +12,9 @@ public enum Executor
 	restart_key,
 	arp_key,
 	nbtstat_key,
+	ping_key,
+	
+	ping("ping "),
 	
 	win_shutdown("shutdown "),
 	win_restart("shutdown "),

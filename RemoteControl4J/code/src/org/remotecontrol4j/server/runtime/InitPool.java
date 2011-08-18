@@ -4,6 +4,7 @@ import java.util.EnumMap;
 
 import org.remotecontrol4j.server.plugin.Arp;
 import org.remotecontrol4j.server.plugin.Nbtstat;
+import org.remotecontrol4j.server.plugin.Ping;
 import org.remotecontrol4j.server.plugin.Restart;
 import org.remotecontrol4j.server.plugin.Shutdown;
 
@@ -34,6 +35,7 @@ public class InitPool {
 		CMD_MAP.put(Executor.restart_key, new Restart().load());
 		CMD_MAP.put(Executor.nbtstat_key, new Nbtstat().load());
 		CMD_MAP.put(Executor.arp_key, new Arp().load());
+		CMD_MAP.put(Executor.ping_key, new Ping().load());
 	}
 	
 }

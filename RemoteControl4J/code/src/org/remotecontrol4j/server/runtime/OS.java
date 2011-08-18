@@ -12,7 +12,7 @@ public enum OS
 	UNIX;
 	
 	/** 默认为Windows **/
-	public static OS type = WINDOWS;
+	public static OS TYPE = WINDOWS;
 	
 	/**
 	 * 判断当前系统类型
@@ -20,8 +20,8 @@ public enum OS
 	 */
 	public static void initCurrentOS(){
 		if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") != -1) {
-			type = OS.WINDOWS;
+			TYPE = OS.WINDOWS;
 		}
-		type = OS.UNIX;
+		TYPE = OS.UNIX;
 	}
 }
