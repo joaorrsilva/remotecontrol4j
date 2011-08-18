@@ -15,7 +15,7 @@ public class Arp implements Container
 
 	public String load() {
 		String cmd = null;
-		switch(OS.type){
+		switch(OS.TYPE){
 		case WINDOWS:
 			cmd = Executor.win_arp.getPrototype();
 			break;

@@ -4,6 +4,9 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
+import org.remotecontrol4j.server.runtime.Container;
+import org.remotecontrol4j.server.runtime.Executor;
+
 
 /**
  * 利用InetAddress的isReachable方法实现 <br>
@@ -12,7 +15,7 @@ import java.net.UnknownHostException;
  * @author and4walker
  *
  */
-public class Ping{
+public class Ping implements Container{
 
 	private static final char TIME_OUT = 3000;
 	
@@ -26,6 +29,11 @@ public class Ping{
 	      e.printStackTrace();
 	  } 
 		return false;
+	}
+
+	@Override
+	public String load() {
+		return Executor.ping.getPrototype();
 	}
   
 	

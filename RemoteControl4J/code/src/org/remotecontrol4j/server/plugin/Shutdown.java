@@ -22,7 +22,7 @@ public class Shutdown implements Container
 
 	public String load() {	
 		String cmd = "";
-		switch(OS.type){
+		switch(OS.TYPE){
 			case WINDOWS:
 				cmd = Executor.win_shutdown.getPrototype();
 				break;
