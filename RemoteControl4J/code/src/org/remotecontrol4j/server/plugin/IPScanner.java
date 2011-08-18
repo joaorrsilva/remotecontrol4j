@@ -32,6 +32,7 @@ public class IPScanner<P> extends Task<P>
 		if(flag){
 			Launcher.run(InitPool.CMD_MAP.get(Executor.ping_key)+StringUtil.BLANK+ip);
 			String msg = Launcher.run(InitPool.CMD_MAP.get(Executor.arp_key)+StringUtil.BLANK+ip);
+			System.out.println(msg);
 			Result result = new Result();
 			result.setValue(OS.TYPE==OS.WINDOWS?msg.split(" ")[32]:msg.split(" ")[32]);//mac address
 			return result;
