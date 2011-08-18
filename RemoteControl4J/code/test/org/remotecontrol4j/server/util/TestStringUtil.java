@@ -5,6 +5,6 @@ public class TestStringUtil
 
 	public static void main(String[] args){
 		String str = StringUtil.isNullOrBlank("")?"is null":"is not null";
-		System.out.println(str);
+		System.out.println(StringUtil.isIPV4(""));
 	}
 }
