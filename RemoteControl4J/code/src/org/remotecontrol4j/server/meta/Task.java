@@ -25,7 +25,7 @@ public abstract class Task<P>
 		this.params = params;
 	}
 	
-	public abstract Result execute();
+	public abstract Result execute() throws Exception;
 
 	public void setStatus(int status) {
 		this.status = status;
