@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 
-import org.remotecontrol4j.server.meta.Host;
 
 /**
  * 利用InetAddress的isReachable方法实现 <br>
@@ -17,9 +16,9 @@ public class Ping{
 
 	private static final char TIME_OUT = 3000;
 	
-	public boolean send(Host host) {
+	public static boolean send(String ip) {
 		try {
-      InetAddress address = InetAddress.getByName(host.getIp());
+      InetAddress address = InetAddress.getByName(ip);
       return address.isReachable(TIME_OUT);
 	  } catch (UnknownHostException e) {
 	      e.printStackTrace();

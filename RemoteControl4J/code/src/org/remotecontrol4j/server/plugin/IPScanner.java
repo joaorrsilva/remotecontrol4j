@@ -1,7 +1,11 @@
 package org.remotecontrol4j.server.plugin;
 
+import java.util.List;
+
+import org.remotecontrol4j.server.meta.Host;
 import org.remotecontrol4j.server.meta.Result;
 import org.remotecontrol4j.server.meta.Task;
+import org.remotecontrol4j.server.util.StringUtil;
 
 /**
  * IP扫描器 <br>
@@ -22,11 +26,16 @@ public class IPScanner<P> extends Task<P>
 
 	@Override
 	public Result execute() {	
-		String ip = this.params[0].toString() + (taskId+1);
-		System.out.println(Thread.currentThread().getName()+"   "+ip);
+		String ip = (String)this.params[0]+(this.taskId+1);
+		boolean flag = Ping.send(ip);
+		if(flag){
+			Result result = new Result();
+			result.setValue(ip);
+			return result;
+		}
 		return new Result();
 	}
-
+ 
 
 	
 	
