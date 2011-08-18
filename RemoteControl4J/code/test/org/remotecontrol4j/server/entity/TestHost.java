@@ -1,5 +1,7 @@
 package org.remotecontrol4j.server.entity;
 
+import org.remotecontrol4j.server.meta.Host;
+
 public class TestHost
 {
 	
@@ -7,7 +9,7 @@ public class TestHost
 		Host host = new Host();
 		host.setIp("");
 		host.setMac("60:EB:69:D7:50:52");
-		
+
 		System.out.println(host.getHexMac());
 	}
 
