@@ -21,7 +21,8 @@ public enum OS
 	public static void initCurrentOS(){
 		if (System.getProperty("os.name").toUpperCase().indexOf("WINDOWS") != -1) {
 			TYPE = OS.WINDOWS;
+		}else{
+			TYPE = OS.UNIX;
 		}
-		TYPE = OS.UNIX;
 	}
 }
