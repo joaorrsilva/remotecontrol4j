@@ -5,6 +5,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import org.remotecontrol4j.server.util.StringUtil;
+
 /**
  * 根据手工配置运行相应的命令
  * 
@@ -32,7 +34,9 @@ public class Launcher
 		  bufferReader = new BufferedReader(inputStreamReader);
 		  String msg = null;
       while ((msg=bufferReader.readLine()) != null) {
-      	msgBuilder.append(msg);
+      	if(!StringUtil.isNullOrBlank(msg)){
+      		msgBuilder.append(msg+StringUtil.ROW_SPLIT);
+      	}
       }
 		} catch (IOException e) {
 			e.printStackTrace();
