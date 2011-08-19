@@ -14,6 +14,10 @@ public class Host
   private String ip;
   /** 端口号 **/
   private int port;
+  /** 计算机名称 **/
+  private String name;
+  /** 计算机组名称 **/
+  private String groupName;
   
   public Host(){
   	
@@ -24,6 +28,29 @@ public class Host
   	this.ip = ip;
   	this.port = port;
   }
+  
+	/**
+   * 获取16进制的MAC地址
+   * 
+   * @return
+   */
+  public byte[] getHexMac()
+  {
+  	byte[] bytes = new byte[6];
+    String[] hex = mac.trim().split("(\\:|\\-)");
+    if (hex.length != 6) {
+        throw new IllegalArgumentException("Invalid MAC address.");
+    }
+    try {
+        for (int i = 0; i < 6; i++) {
+            bytes[i] = (byte) Integer.parseInt(hex[i], 16);
+        }
+    }catch (NumberFormatException e) {
+        throw new IllegalArgumentException("Invalid hex digit in MAC address.");
+    }
+    return bytes;
+  }
+
   
   public String getMac()
   {
@@ -55,26 +82,21 @@ public class Host
     this.port = port;
   }
 
-  /**
-   * 获取16进制的MAC地址
-   * 
-   * @return
-   */
-  public byte[] getHexMac()
-  {
-  	byte[] bytes = new byte[6];
-    String[] hex = mac.trim().split("(\\:|\\-)");
-    if (hex.length != 6) {
-        throw new IllegalArgumentException("Invalid MAC address.");
-    }
-    try {
-        for (int i = 0; i < 6; i++) {
-            bytes[i] = (byte) Integer.parseInt(hex[i], 16);
-        }
-    }catch (NumberFormatException e) {
-        throw new IllegalArgumentException("Invalid hex digit in MAC address.");
-    }
-    return bytes;
-  }
+  public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getGroupName() {
+		return groupName;
+	}
+
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
 
 }
