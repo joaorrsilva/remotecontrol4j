@@ -40,9 +40,10 @@ public class Nbtstat implements Container
 				}
 			}						
 			for(int i=0;i<strList.size();i++){
-				if("<00>".equalsIgnoreCase(strList.get(i).trim())){
+				if(strList.get(i).trim().contains("<00>")){
 					if("UNIQUE".equalsIgnoreCase(strList.get(i+1).trim())){
-						host.setName(strList.get(i-1));
+						host.setName(StringUtil.isNullOrBlank(strList.get(i).replace("<00>", "")) ? 
+								strList.get(i-1) : strList.get(i).replace("<00>", ""));
 						continue;
 					}else if("GROUP".equalsIgnoreCase(strList.get(i+1).trim())){
 						host.setGroupName(strList.get(i-1));

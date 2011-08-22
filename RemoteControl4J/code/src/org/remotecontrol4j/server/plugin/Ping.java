@@ -59,15 +59,15 @@ public class Ping implements Container{
 			String[] rowMsg = msg.split(StringUtil.ROW_SPLIT);
 			if(!StringUtil.isNull(rowMsg) && rowMsg.length >= 2){
 				String[] rowStr = rowMsg[0].split(StringUtil.BLANK);
-				if(!StringUtil.isNull(rowStr) && rowStr.length >= 2 && !StringUtil.isIPV4(rowStr[1]) && rowStr[1].split("\\.").length==2){//exist
+				if(!StringUtil.isNull(rowStr) && rowStr.length >= 2 && !StringUtil.isIPV4(rowStr[1]) && rowStr[1].split("\\.").length==3){//exist
 					host.setName(rowStr[1].split("\\.")[0]);
 					host.setGroupName(rowStr[1].split("\\.")[1]);
 				}
 				if(!rowMsg[1].contains("Request timed out.")){//online
 					host.setOnline(true);
 					Host nbt = Nbtstat.getHost(ip);
-					host.setName(host.getName()==null?nbt.getName():host.getName());
-					host.setGroupName(host.getGroupName()==null?nbt.getGroupName():host.getGroupName());
+					host.setName(StringUtil.isNullOrBlank(host.getName())?nbt.getName():host.getName());
+					host.setGroupName(StringUtil.isNullOrBlank(host.getGroupName())?nbt.getGroupName():host.getGroupName());
 					host.setMac(nbt.getMac());
 				}
 			}

@@ -45,9 +45,6 @@ public class IPScanner<P> extends Task<P>
 		Host newHost = Ping.getHost(ip);
 		result.setValue(newHost);			
 		Result.resultMap.put(this.taskId, result);
-		if(null != newHost){
-			System.out.println("ip="+newHost.getIp()+" isonline="+newHost.isOnline()+" name="+newHost.getName()+" groupName="+newHost.getGroupName()+" mac="+newHost.getMac());
-		}
 	}
 
 }
