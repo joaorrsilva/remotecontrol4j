@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import org.remotecontrol4j.server.meta.Result;
 import org.remotecontrol4j.server.meta.Task;
 
 /**

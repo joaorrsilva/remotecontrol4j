@@ -1,7 +1,5 @@
 package org.remotecontrol4j.server.plugin;
 
-import java.util.concurrent.ConcurrentHashMap;
-
 import org.remotecontrol4j.server.meta.Host;
 import org.remotecontrol4j.server.meta.Result;
 import org.remotecontrol4j.server.meta.Task;
