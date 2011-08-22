@@ -3,11 +3,8 @@ package org.remotecontrol4j.server.runtime;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Callable;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
 
 import org.remotecontrol4j.server.meta.Result;
 import org.remotecontrol4j.server.meta.Task;
@@ -22,10 +19,8 @@ import org.remotecontrol4j.server.meta.Task;
 public class TaskRouter
 {
 	
-	private static final int THREAD_POOL = 10;
-	
 	/**
-	 * 执行任务入口点
+	 * 执行任务入口点 ：智能分配任务数
 	 * 
 	 * @param clazz
 	 * @param taskCount
@@ -34,37 +29,41 @@ public class TaskRouter
 	 * @return
 	 * @throws Exception
 	 */
-	public static <P extends Object> Result run(Class<? extends Task> clazz,int taskCount,int threadCount,P... params) throws Exception{
+	public static <P extends Object> void run(Class<? extends Task> clazz,int taskCount,int threadCount,P... params) throws Exception{
 		if(1 < threadCount){
-			return runMulti(clazz,taskCount,threadCount,params);
+		  runMulti(clazz,taskCount,threadCount,params);
+		  return;
 		}
-		return runSingle(clazz,taskCount,params);
-	}
+		runSingle(clazz,taskCount,params);
+		return;
+	}	
 	
-	private static <P extends Object> Result runSingle(Class<? extends Task> clazz,int taskCount,P... params) throws Exception{
+	private static <P extends Object> void runSingle(Class<? extends Task> clazz,int taskCount,P... params) throws Exception{
 		List<Task> taskList = getTaskList(clazz,taskCount,params);
-		Result result = new Result();
 		for(Task task : taskList){
-			result.getResultMap().put(task.getTaskId(), task.execute());
+			 task.execute();
 		}
-		return result;
 	}
 	
-	private static <P extends Object> Result runMulti(Class<? extends Task> clazz,int taskCount,int threadCount,P... params) throws Exception {		
+	private static <P extends Object> void runMulti(Class<? extends Task> clazz,int taskCount,int threadCount,P... params) throws Exception {		
 		List<Task> taskList = getTaskList(clazz,taskCount,params);
-		Result result = new Result();
 		List<Task>[] taskListPerThread = TaskRouter.distribute(taskList, threadCount);
-		ExecutorService pool = Executors.newFixedThreadPool(THREAD_POOL);
+//		ExecutorService pool = Executors.newFixedThreadPool(taskCount);
+//		for (int i = 0; i < taskListPerThread.length; i++) {
+//				Callable<Result> workThread = new TaskWorker(i, taskListPerThread[i]);
+//				Future<Result> future = pool.submit(workThread);
+//				ConcurrentHashMap<Integer,Result> taskResultMap = future.get().getResultMap();
+//				for(Integer key : taskResultMap.keySet()){
+//					result.getResultMap().put(key, taskResultMap.get(key));
+//				}
+//		}
+//		pool.shutdown();
+		ExecutorService pool = Executors.newCachedThreadPool();
 		for (int i = 0; i < taskListPerThread.length; i++) {
-				Callable<Result> workThread = new TaskWorker(i, taskListPerThread[i]);
-				Future<Result> future = pool.submit(workThread);
-				ConcurrentHashMap<Integer,Result> taskResultMap = future.get().getResultMap();
-				for(Integer key : taskResultMap.keySet()){
-					result.getResultMap().put(key, taskResultMap.get(key));
-				}
+			TaskWorker workThread = new TaskWorker(i,taskListPerThread[i]);
+			pool.execute(workThread);
 		}
 		pool.shutdown();
-		return result;
 	}
 	
 	/**

@@ -13,17 +13,32 @@ import java.util.regex.Pattern;
  */
 public class StringUtil
 {
+	/** 空格 **/	
+	public static final String ROW_SPLIT = ";";
+	
 	/** 空格 **/
 	public static final String BLANK = " ";
 	
 	/**
-	 * 判断是否为空或空格
+	 * 判断字符串是否为空或空格
 	 * 
 	 * @param str
 	 * @return
 	 */
 	public static boolean isNullOrBlank(String str) {
 		if (str == null || "".equals(str.trim())) {
+			return true;
+		}
+		return false;
+	}
+	
+	/**
+	 * 判断数组是否为空或空格
+	 * @param str
+	 * @return
+	 */
+	public static boolean isNull(String... str) {
+		if (str == null || str.length == 0) {
 			return true;
 		}
 		return false;

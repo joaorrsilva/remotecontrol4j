@@ -6,6 +6,7 @@ import java.util.List;
 import org.remotecontrol4j.server.meta.Host;
 import org.remotecontrol4j.server.runtime.Container;
 import org.remotecontrol4j.server.runtime.Executor;
+import org.remotecontrol4j.server.runtime.InitPool;
 import org.remotecontrol4j.server.runtime.Launcher;
 import org.remotecontrol4j.server.util.StringUtil;
 
@@ -21,35 +22,41 @@ public class Nbtstat implements Container
 	 * @param info
 	 * @return
 	 */
-	public static Host getHost(String info){
+	public static Host getHost(String ip){
 		Host host = new Host();
-		String[] rowInfo = info.split(StringUtil.ROW_SPLIT);
-		List<String> strList = new ArrayList<String>();
-		for(String row : rowInfo){
-			if(!row.contains("<00>") && !row.contains("MAC")){
-				continue;
-			}
-			for(String str : row.split(StringUtil.BLANK)){
-				if(StringUtil.isNullOrBlank(str)){
+		try {
+			String msg = Launcher.run(InitPool.CMD_MAP.get(Executor.nbtstat_key)+ip);
+			String[] rowInfo = msg.split(StringUtil.ROW_SPLIT);
+			List<String> strList = new ArrayList<String>();
+			for(String row : rowInfo){
+				if(!row.contains("<00>") && !row.contains("MAC")){
 					continue;
 				}
-				strList.add(str);
+				for(String str : row.split(StringUtil.BLANK)){
+					if(StringUtil.isNullOrBlank(str)){
+						continue;
+					}
+					strList.add(str);
+				}
+			}						
+			for(int i=0;i<strList.size();i++){
+				if("<00>".equalsIgnoreCase(strList.get(i).trim())){
+					if("UNIQUE".equalsIgnoreCase(strList.get(i+1).trim())){
+						host.setName(strList.get(i-1));
+						continue;
+					}else if("GROUP".equalsIgnoreCase(strList.get(i+1).trim())){
+						host.setGroupName(strList.get(i-1));
+						continue;
+					}				
+				}
+				if("MAC".equalsIgnoreCase(strList.get(i).trim())){
+					host.setMac(strList.get(i+3));
+				}
 			}
-		}						
-		for(int i=0;i<strList.size();i++){
-			if("<00>".equalsIgnoreCase(strList.get(i).trim())){
-				if("UNIQUE".equalsIgnoreCase(strList.get(i+1).trim())){
-					host.setName(strList.get(i-1));
-					continue;
-				}else if("GROUP".equalsIgnoreCase(strList.get(i+1).trim())){
-					host.setGroupName(strList.get(i-1));
-					continue;
-				}				
-			}
-			if("MAC".equalsIgnoreCase(strList.get(i).trim())){
-				host.setMac(strList.get(i+3));
-			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
+		
 		return host;
 	}
 

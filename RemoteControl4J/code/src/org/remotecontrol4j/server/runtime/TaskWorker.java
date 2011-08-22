@@ -1,37 +1,47 @@
 package org.remotecontrol4j.server.runtime;
 
 import java.util.List;
-import java.util.concurrent.Callable;
 
-import org.remotecontrol4j.server.meta.Result;
 import org.remotecontrol4j.server.meta.Task;
 
 /**
  * 任务运行器
  * 
  * @author and4walker
+ * @param <P>
  * @param <T>
  *
  */
 @SuppressWarnings("rawtypes")
-public class TaskWorker implements Callable<Result>
+public class TaskWorker<P> extends Thread
 {
 	private List<Task> taskList;
 	private int threadId;
-	private Result result;
-	
+
+
 	public TaskWorker(int threadId,List<Task> taskList){
 		this.threadId = threadId;
 		this.taskList = taskList;
-		this.result = new Result();
 	}
 
+//	@Override
+//	public Result call() throws Exception {
+//		for(Task task : taskList){
+//			this.result.getResultMap().put(task.getTaskId(), task.execute());
+//		}
+//		return result;
+//	}
+	
+
 	@Override
-	public Result call() throws Exception {
+	public void run() {
 		for(Task task : taskList){
-			this.result.getResultMap().put(task.getTaskId(), task.execute());
+			try {
+				task.execute();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-		return result;
 	}
 
 	public List<Task> getTaskList() {
@@ -48,14 +58,6 @@ public class TaskWorker implements Callable<Result>
 
 	public void setThreadId(int threadId) {
 		this.threadId = threadId;
-	}
-
-	public Result getResult() {
-		return result;
-	}
-
-	public void setResult(Result result) {
-		this.result = result;
 	}
 
 }

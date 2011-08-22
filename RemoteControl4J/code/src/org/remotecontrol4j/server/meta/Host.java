@@ -18,17 +18,15 @@ public class Host
   private String name;
   /** 计算机组名称 **/
   private String groupName;
+  /** 是否在线 **/
+  private boolean isOnline;
+  /** ip前缀 **/
+  private String preIp;
   
   public Host(){
   	
   }
 
-  public Host(String mac,String ip,int port){
-  	this.mac = mac;
-  	this.ip = ip;
-  	this.port = port;
-  }
-  
 	/**
    * 获取16进制的MAC地址
    * 
@@ -98,5 +96,19 @@ public class Host
 		this.groupName = groupName;
 	}
 
+	public boolean isOnline() {
+		return isOnline;
+	}
 
+	public void setOnline(boolean isOnline) {
+		this.isOnline = isOnline;
+	}
+
+	public String getPreIp() {
+		return preIp;
+	}
+
+	public void setPreIp(String preIp) {
+		this.preIp = preIp;
+	}
 }

@@ -14,16 +14,16 @@ public enum Executor
 	nbtstat_key,
 	ping_key,
 	
-	ping("ping "),
+	ping("ping -n 1 -a "),
 	
 	win_shutdown("shutdown "),
 	win_restart("shutdown "),
 	win_arp("arp -a "),
 	win_nbtstat("nbtstat -a "),
 	
-	unix_shutdown("shutdown"),
-	unix_restart("shutdown"),
-	unix_arp("arp"),
+	unix_shutdown("shutdown "),
+	unix_restart("shutdown "),
+	unix_arp("arp "),
 	unix_nbtstat("nbtstat -a ");
 	
 	/** 命令原型 **/
