@@ -2,10 +2,14 @@ package org.remotecontrol4j.server.runtime;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+
 import org.remotecontrol4j.server.meta.Host;
+import org.remotecontrol4j.server.meta.NIC;
 import org.remotecontrol4j.server.meta.Result;
 import org.remotecontrol4j.server.plugin.IPScanner;
 import org.remotecontrol4j.server.util.StringUtil;
+import org.remotecontrol4j.server.util.SysInfo;
 
 public class TestTaskRouter
 {
@@ -21,7 +25,7 @@ public class TestTaskRouter
 		
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		System.out.println(format.format(new Date()));
-		
+				
 
 		Host host = new Host();
 		host.setIp("192.168.3.176");
@@ -38,8 +42,12 @@ public class TestTaskRouter
 			if(null == value){
 				continue;
 			}
-			Host ho = (Host)value; 
-			System.out.println(ho.getIp()+"active mac:"+ho.getName() );
+			Host result = (Host)value; 
+			if(StringUtil.isNullOrBlank(result.getName()) && StringUtil.isNullOrBlank(result.getGroupName()) 
+					&& StringUtil.isNullOrBlank(result.getMac()) ){
+				continue;
+			}
+			System.out.println(result.getIp()+" iswindows="+result.isWindows()+" isonline="+result.isOnline()+" name:"+result.getName()+" groupname="+result.getGroupName()+" mac="+result.getMac() );
 		}
 		System.out.println(format.format(new Date()));
 		
