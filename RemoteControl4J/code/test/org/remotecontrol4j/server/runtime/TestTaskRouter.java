@@ -2,8 +2,6 @@ package org.remotecontrol4j.server.runtime;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.CountDownLatch;
-
 import org.remotecontrol4j.server.meta.Host;
 import org.remotecontrol4j.server.meta.Result;
 import org.remotecontrol4j.server.plugin.IPScanner;
