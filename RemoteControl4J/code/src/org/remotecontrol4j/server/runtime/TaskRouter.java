@@ -31,10 +31,9 @@ public class TaskRouter
 	public static <P extends Object> void run(Class<? extends Task> clazz,int taskCount,int threadCount,P... params) throws Exception{
 		if(1 < threadCount){
 		  runMulti(clazz,taskCount,threadCount,params);
-		  return;
+		}else{
+			runSingle(clazz,taskCount,params);
 		}
-		runSingle(clazz,taskCount,params);
-		return;
 	}	
 	
 	private static <P extends Object> void runSingle(Class<? extends Task> clazz,int taskCount,P... params) throws Exception{

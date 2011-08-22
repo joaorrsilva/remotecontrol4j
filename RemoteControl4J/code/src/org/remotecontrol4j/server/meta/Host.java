@@ -22,10 +22,8 @@ public class Host
   private boolean isOnline;
   /** ip前缀 **/
   private String preIp;
-  
-  public Host(){
-  	
-  }
+  /** 是否为windows **/
+  private boolean isWindows; 
 
 	/**
    * 获取16进制的MAC地址
@@ -50,7 +48,17 @@ public class Host
   }
 
   
-  public String getMac()
+  public boolean isWindows() {
+		return isWindows;
+	}
+
+
+	public void setWindows(boolean isWindows) {
+		this.isWindows = isWindows;
+	}
+
+
+	public String getMac()
   {
     return mac;
   }

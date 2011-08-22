@@ -68,7 +68,12 @@ public class Ping implements Container{
 					Host nbt = Nbtstat.getHost(ip);
 					host.setName(StringUtil.isNullOrBlank(host.getName())?nbt.getName():host.getName());
 					host.setGroupName(StringUtil.isNullOrBlank(host.getGroupName())?nbt.getGroupName():host.getGroupName());
-					host.setMac(nbt.getMac());
+					host.setMac(StringUtil.isNullOrBlank(nbt.getMac())?Arp.getMAC(ip):nbt.getMac());
+					if(StringUtil.isNullOrBlank(host.getName()) && StringUtil.isNullOrBlank(host.getGroupName())){
+						host.setWindows(false);
+					}else{
+						host.setWindows(true);
+					}
 				}
 			}
 		} catch (Exception e) {

@@ -52,6 +52,7 @@ public class Nbtstat implements Container
 				}
 				if("MAC".equalsIgnoreCase(strList.get(i).trim())){
 					host.setMac(strList.get(i+3));
+					break;
 				}
 			}
 		} catch (Exception e) {
