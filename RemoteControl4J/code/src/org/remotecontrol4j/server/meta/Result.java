@@ -16,11 +16,9 @@ public class Result
 	
 	private Object value;
 	
-	private ConcurrentHashMap<Integer,Result> resultMap;
-	
+	public static  ConcurrentHashMap<Integer,Result> resultMap = new ConcurrentHashMap<Integer,Result>();
 	
 	public Result(){
-		resultMap = new ConcurrentHashMap<Integer,Result>();
 	}
 	
 	public ConcurrentHashMap<Integer, Result> getResultMap() {
